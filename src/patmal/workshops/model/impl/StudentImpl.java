@@ -39,6 +39,10 @@ public class StudentImpl extends AbstractPerson implements Student {
         }
         return new ArrayList<>();
     }
+
+     public void setTeam(Team team) {
+        this.team = team;
+    }
 } 
     
 

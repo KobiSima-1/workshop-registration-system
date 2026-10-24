@@ -19,6 +19,17 @@ public class InstructorImpl extends AbstractPerson implements Instructor {
        return copy;
     }
 
+    public void addWorkshop(Workshop workshop) {
+        for (Workshop w : workshops) {
+            if (w.getId().equals(workshop.getId())) {
+                return;
+            }
+        }
+        workshops.add(workshop);
+    }
+
+    
+
 } 
     
 
