@@ -28,6 +28,10 @@ public class InstructorImpl extends AbstractPerson implements Instructor {
         workshops.add(workshop);
     }
 
+    public void removeWorkshop(Workshop workshop) {
+        workshops.remove(workshop);
+    }
+
     
 
 } 

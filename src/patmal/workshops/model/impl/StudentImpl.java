@@ -11,6 +11,7 @@ public class StudentImpl extends AbstractPerson implements Student {
 
     public StudentImpl(String id, String name, String email) {
         super(id, name, email);
+        team = null;
         
     }
 
@@ -42,6 +43,10 @@ public class StudentImpl extends AbstractPerson implements Student {
 
      public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public Team getTeam() {
+        return team;
     }
 } 
     

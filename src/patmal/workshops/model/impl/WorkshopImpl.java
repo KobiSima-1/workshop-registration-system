@@ -38,4 +38,6 @@ public class WorkshopImpl implements Workshop {
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
     }
+
+    
 }
