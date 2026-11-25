@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- root: top aggregator and top parent of the whole hierarchy -->
+    <groupId>patmal.workshops.student.impl</groupId>
+    <artifactId>root</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Workshop Registration System</name>
+
+    <modules>
+        <module>core</module>
+        <module>app</module>
+    </modules>
+
+    <properties>
+        <!-- build settings -->
+        <java.version>25</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- API jars and tester (installed manually into ~/.m2, see README.md) -->
+        <workshops.api.version>2.0</workshops.api.version>
+        <workshops.tester.version>2.0</workshops.tester.version>
+
+        <!-- third-party libraries -->
+        <log4j.version>2.26.1</log4j.version>
+        <jackson.version>2.23.0</jackson.version>
+        <commons-validator.version>1.11.0</commons-validator.version>
+        <commons-csv.version>1.14.1</commons-csv.version>
+
+        <!-- plugins -->
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+        <maven-shade-plugin.version>3.6.2</maven-shade-plugin.version>
+        <exec-maven-plugin.version>3.7.0</exec-maven-plugin.version>
+
+        <!-- bonus 8.2: run "mvn clean install -DskipTester=true" to skip the tester run -->
+        <skipTester>false</skipTester>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- BOMs: manage the versions of a whole family of artifacts -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-bom</artifactId>
+                <version>${log4j.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- other third-party libraries -->
+            <dependency>
+                <groupId>commons-validator</groupId>
+                <artifactId>commons-validator</artifactId>
+                <version>${commons-validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-csv</artifactId>
+                <version>${commons-csv.version}</version>
+            </dependency>
+
+            <!-- API jars (not on Maven Central) -->
+            <dependency>
+                <groupId>patmal.workshops</groupId>
+                <artifactId>model</artifactId>
+                <version>${workshops.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>patmal.workshops</groupId>
+                <artifactId>logic</artifactId>
+                <version>${workshops.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>patmal.workshops</groupId>
+                <artifactId>workshop-tester</artifactId>
+                <version>${workshops.tester.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- our own modules -->
+            <dependency>
+                <groupId>patmal.workshops.student.impl</groupId>
+                <artifactId>model-impl</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>patmal.workshops.student.impl</groupId>
+                <artifactId>logic-impl</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${maven-shade-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${exec-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
